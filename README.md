@@ -11,6 +11,10 @@
 
 ## 阅读与运行
 
+公开阅读：<https://kengcc.github.io/Grandpas-Life-Story/>
+
+推送到 `main` 分支后，GitHub Actions 会核对原文和插画，并自动将 `dist/` 发布到 GitHub Pages。
+
 网站由 HTML、CSS 和 JavaScript 构成，无须安装依赖或编译。在本目录启动本地静态服务器：
 
 ```sh
