@@ -1,5 +1,5 @@
 {
-  "reference": "Latest user-provided revised manuscript on 2026-10-15 (adds age 92 in the afterword)",
+  "reference": "User-provided manuscript and confirmed interview/writing credits on 2026-10-15",
   "wordingUnchanged": false,
   "normalization": [
     "Whitespace and line wrapping",
@@ -7,7 +7,7 @@
     "Decorative separator ───",
     "Correct the typo 當吋 to 当时"
   ],
-  "normalizedTextSHA256": "a80861858590b46ace90b3e471a8da1ac4303b0487a3a673acc9a699af15655f",
+  "normalizedTextSHA256": "7c530853e0263fe76cbfa35678c424b492f8eaa5eae1a74eba18a646066e5a99",
   "sections": [
     {
       "heading": "前言",
@@ -67,13 +67,31 @@
   ],
   "latestRevision": {
     "section": "后记：一段值得珍藏的家族记忆",
-    "before": "以上真人故事，是金线和金玉在永发家与爸爸闲聊时所做的记录。",
-    "submitted": "以上真人故事，是金线和金玉在永发家与當吋92岁的爸爸闲聊时 所做的记录。",
-    "after": "以上真人故事，是金线和金玉在永发家与当时92岁的爸爸闲聊时所做的记录。",
-    "contentChanges": 1,
+    "authorization": "User confirmed 刘永发（刘天财之子）整理成文，刘永发、金线和金玉共同访谈记录。保留原标题及正文。",
+    "changes": [
+      {
+        "before": "以上真人故事，是金线和金玉在永发家与当时92岁的爸爸闲聊时所做的记录。",
+        "after": "以上真人故事，是刘永发、金线和金玉在永发家与当时92岁的爸爸闲聊时共同做的访谈记录，由刘永发（刘天财之子）整理成文。"
+      },
+      {
+        "before": "感谢爸爸愿意分享这些人生经历，也感谢金线和金玉把这些故事记录下来。",
+        "after": "感谢爸爸愿意分享这些人生经历，也感谢刘永发、金线和金玉把这些故事记录下来。"
+      }
+    ],
     "allOtherSectionsUnchanged": true,
-    "submittedNormalizedTextSHA256": "46df2df5f174037f5874e4f439be0025e817d4aeebbd7d492cd6cac152d96335",
-    "matchesUpdatedManuscriptAfterListedNormalization": true,
     "artworkChangeRequired": false
-  }
+  },
+  "revisionHistory": [
+    {
+      "section": "后记：一段值得珍藏的家族记忆",
+      "before": "以上真人故事，是金线和金玉在永发家与爸爸闲聊时所做的记录。",
+      "submitted": "以上真人故事，是金线和金玉在永发家与當吋92岁的爸爸闲聊时 所做的记录。",
+      "after": "以上真人故事，是金线和金玉在永发家与当时92岁的爸爸闲聊时所做的记录。",
+      "contentChanges": 1,
+      "allOtherSectionsUnchanged": true,
+      "submittedNormalizedTextSHA256": "46df2df5f174037f5874e4f439be0025e817d4aeebbd7d492cd6cac152d96335",
+      "matchesUpdatedManuscriptAfterListedNormalization": true,
+      "artworkChangeRequired": false
+    }
+  ]
 }
