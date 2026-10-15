@@ -127,6 +127,14 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
 });
 $('reread').onclick = e => { e.preventDefault(); go(0); };
+document.querySelectorAll('a[href="#storyboard"]').forEach(link => {
+  link.addEventListener('click', () => { $('storyboardOverview').open = true; });
+});
+function revealLinkedStoryboard() {
+  if (location.hash === '#storyboard') $('storyboardOverview').open = true;
+}
+window.addEventListener('hashchange', revealLinkedStoryboard);
+revealLinkedStoryboard();
 $('storyboardList').innerHTML = STORY.map((c, i) => `<details class="board-chapter"><summary><span class="board-number">${String(i + 1).padStart(2, '0')}</span><span class="board-title">${esc(c.title)}${c.continued ? '（续）' : ''}</span><span>＋</span></summary><ol>${c.frames.map(f => `<li><div class="source-prose">${prose(f[1])}</div></li>`).join('')}</ol><button class="board-read" data-chapter="${i}">阅读这一页漫画 →</button></details>`).join('');
 document.querySelectorAll('[data-chapter]').forEach(b => b.onclick = () => go(Number(b.dataset.chapter)));
 
