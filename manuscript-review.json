@@ -1,5 +1,5 @@
 {
-  "reference": "User-provided manuscript and confirmed interview/writing credits on 2026-10-15",
+  "reference": "User-provided manuscript and subsequent authorized afterword additions on 2026-10-15",
   "wordingUnchanged": false,
   "normalization": [
     "Whitespace and line wrapping",
@@ -7,7 +7,7 @@
     "Decorative separator ───",
     "Correct the typo 當吋 to 当时"
   ],
-  "normalizedTextSHA256": "7c530853e0263fe76cbfa35678c424b492f8eaa5eae1a74eba18a646066e5a99",
+  "normalizedTextSHA256": "e322507fff8ba27d630d74a67281358f4f1178d933f4f507dbf34e789d273bb5",
   "sections": [
     {
       "heading": "前言",
@@ -67,17 +67,10 @@
   ],
   "latestRevision": {
     "section": "后记：一段值得珍藏的家族记忆",
-    "authorization": "User confirmed 刘永发（刘天财之子）整理成文，刘永发、金线和金玉共同访谈记录。保留原标题及正文。",
-    "changes": [
-      {
-        "before": "以上真人故事，是金线和金玉在永发家与当时92岁的爸爸闲聊时所做的记录。",
-        "after": "以上真人故事，是刘永发、金线和金玉在永发家与当时92岁的爸爸闲聊时共同做的访谈记录，由刘永发（刘天财之子）整理成文。"
-      },
-      {
-        "before": "感谢爸爸愿意分享这些人生经历，也感谢金线和金玉把这些故事记录下来。",
-        "after": "感谢爸爸愿意分享这些人生经历，也感谢刘永发、金线和金玉把这些故事记录下来。"
-      }
-    ],
+    "submitted": "他的记忆很好，当时92 岁的他，当晚辈站子他面前，他还可以记得谁的孩子，谁的孙子",
+    "addedText": "当时已92岁的他，看到站在面前的晚辈，仍能清楚记得对方是谁的孩子、谁的孙辈。",
+    "before": "最令人佩服的是，爸爸的记性真好。许多年前发生的事情，包括工作时的情景、生活中的细节，他都还记得那么清楚。",
+    "after": "最令人佩服的是，爸爸的记性真好。许多年前发生的事情，包括工作时的情景、生活中的细节，他都还记得那么清楚。当时已92岁的他，看到站在面前的晚辈，仍能清楚记得对方是谁的孩子、谁的孙辈。",
     "allOtherSectionsUnchanged": true,
     "artworkChangeRequired": false
   },
@@ -91,6 +84,22 @@
       "allOtherSectionsUnchanged": true,
       "submittedNormalizedTextSHA256": "46df2df5f174037f5874e4f439be0025e817d4aeebbd7d492cd6cac152d96335",
       "matchesUpdatedManuscriptAfterListedNormalization": true,
+      "artworkChangeRequired": false
+    },
+    {
+      "section": "后记：一段值得珍藏的家族记忆",
+      "authorization": "User confirmed 刘永发（刘天财之子）整理成文，刘永发、金线和金玉共同访谈记录。保留原标题及正文。",
+      "changes": [
+        {
+          "before": "以上真人故事，是金线和金玉在永发家与当时92岁的爸爸闲聊时所做的记录。",
+          "after": "以上真人故事，是刘永发、金线和金玉在永发家与当时92岁的爸爸闲聊时共同做的访谈记录，由刘永发（刘天财之子）整理成文。"
+        },
+        {
+          "before": "感谢爸爸愿意分享这些人生经历，也感谢金线和金玉把这些故事记录下来。",
+          "after": "感谢爸爸愿意分享这些人生经历，也感谢刘永发、金线和金玉把这些故事记录下来。"
+        }
+      ],
+      "allOtherSectionsUnchanged": true,
       "artworkChangeRequired": false
     }
   ]
