@@ -62,3 +62,6 @@ h1{font-size:clamp(42px,4.5vw,65px);letter-spacing:3px}.hero-text{align-self:cen
  .reading-tip{margin:16px 0 0;font-size:10px;line-height:1.8}
 }
 @media print{.desktop-tip{display:none}}
+
+/* Small public source link in the footer. */
+footer{align-items:center;gap:12px}footer .source-link{display:inline-flex;align-items:center;min-height:28px;color:#566552;font-size:10px;letter-spacing:.5px;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}footer .source-link:hover{color:var(--red)}
