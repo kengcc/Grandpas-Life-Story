@@ -1,0 +1,67 @@
+{
+  "reference": "User-provided updated manuscript on 2026-10-15",
+  "wordingUnchanged": true,
+  "normalization": [
+    "Whitespace and line wrapping",
+    "Kangxi woman radical ⼥ to standard 女",
+    "Decorative separator ───"
+  ],
+  "normalizedTextSHA256": "4e0e09e978d29585c1080f6612505c54a77c8c07a5653f1b67fbcb38720afe91",
+  "sections": [
+    {
+      "heading": "前言",
+      "matches": true
+    },
+    {
+      "heading": "一、我的身世与名字的由来",
+      "matches": true
+    },
+    {
+      "heading": "二、离开故乡，来到刘家",
+      "matches": true
+    },
+    {
+      "heading": "三、九岁时在菲律宾的艰苦生活",
+      "matches": true
+    },
+    {
+      "heading": "四、十五岁才有机会上学",
+      "matches": true
+    },
+    {
+      "heading": "五、二十岁成家，开始承担家庭责任",
+      "matches": true
+    },
+    {
+      "heading": "六、从零开始，靠双手摸索谋生",
+      "matches": true
+    },
+    {
+      "heading": "七、骑着脚车奔波，只为一家人的生活",
+      "matches": true
+    },
+    {
+      "heading": "八、回顾人生，留给后代的意义",
+      "matches": true
+    },
+    {
+      "heading": "后记：一段值得珍藏的家族记忆",
+      "matches": true
+    }
+  ],
+  "illustrationCorrections": [
+    {
+      "page": 2,
+      "reason": "The adoptive grandfather was already in the Philippines, so remove the elderly man from the China farewell scene."
+    },
+    {
+      "page": 3,
+      "reason": "Match the accepted household job, daily chores, and adult-sized burden to captions 10-12."
+    }
+  ],
+  "illustrationsVerified": true,
+  "updatedArtworkFiles": [
+    "dist/assets/page-02-v3.png",
+    "dist/assets/page-03-v3.png"
+  ]
+}
