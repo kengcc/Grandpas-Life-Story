@@ -71,7 +71,7 @@ function render(scroll = false) {
   $('comicPage').innerHTML = chapter.frames.map((_, j) => panelHTML(chapter, current, j)).join('');
   $('prev').disabled = current === 0;
   $('next').disabled = false;
-  $('next').textContent = current === 9 ? '阅读后记 →' : '下一页 →';
+  $('next').textContent = current === 9 ? '看家族相簿 →' : '下一页 →';
   $('dots').textContent = `${current + 1} / ${STORY.length}`;
   try { localStorage.setItem('tiancai-page', String(current)); } catch {}
   $('comicPage').querySelectorAll('[data-panel]').forEach(b => b.addEventListener('click', () => openPanel(Number(b.dataset.panel))));
@@ -86,7 +86,7 @@ function jumpToReader() {
 function go(i) { current = Math.min(9, Math.max(0, i)); render(true); }
 function advance() {
   if (current < STORY.length - 1) go(current + 1);
-  else window.scrollTo({top: Math.max(0, window.scrollY + $('afterword').getBoundingClientRect().top - 12), behavior: 'instant'});
+  else window.scrollTo({top: Math.max(0, window.scrollY + $('familyAlbum').getBoundingClientRect().top - 12), behavior: 'instant'});
 }
 function openPanel(j) {
   const chapter = STORY[current];
@@ -106,12 +106,23 @@ $('chapterSelect').addEventListener('change', e => go(Number(e.target.value)));
 $('prev').onclick = () => go(current - 1);
 $('next').onclick = advance;
 $('closeDialog').onclick = () => $('panelDialog').close();
-$('panelDialog').addEventListener('click', e => {
-  const d = $('panelDialog'), r = d.getBoundingClientRect();
-  if (e.target === d && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) d.close();
+$('closePhotoDialog').onclick = () => $('photoDialog').close();
+const photoLinks = [...document.querySelectorAll('.photo-link')];
+photoLinks.forEach(link => link.addEventListener('click', e => {
+  e.preventDefault();
+  $('largePhoto').src = link.href;
+  $('largePhoto').alt = link.querySelector('img').alt;
+  $('photoTitle').textContent = link.dataset.photoTitle;
+  $('photoDialog').showModal();
+}));
+['panelDialog', 'photoDialog'].forEach(id => {
+  $(id).addEventListener('click', e => {
+    const d = $(id), r = d.getBoundingClientRect();
+    if (e.target === d && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) d.close();
+  });
 });
 document.addEventListener('keydown', e => {
-  if ($('panelDialog').open || ['SELECT', 'INPUT', 'TEXTAREA', 'BUTTON'].includes(document.activeElement.tagName)) return;
+  if ($('panelDialog').open || $('photoDialog').open || ['SELECT', 'INPUT', 'TEXTAREA', 'BUTTON'].includes(document.activeElement.tagName)) return;
   if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
 });
@@ -119,14 +130,18 @@ $('reread').onclick = e => { e.preventDefault(); go(0); };
 $('storyboardList').innerHTML = STORY.map((c, i) => `<details class="board-chapter"><summary><span class="board-number">${String(i + 1).padStart(2, '0')}</span><span class="board-title">${esc(c.title)}${c.continued ? '（续）' : ''}</span><span>＋</span></summary><ol>${c.frames.map(f => `<li><div class="source-prose">${prose(f[1])}</div></li>`).join('')}</ol><button class="board-read" data-chapter="${i}">阅读这一页漫画 →</button></details>`).join('');
 document.querySelectorAll('[data-chapter]').forEach(b => b.onclick = () => go(Number(b.dataset.chapter)));
 
+function photoPrintHTML() {
+  return photoLinks.map(link => `<article class="print-photo"><h2>家族相簿 · ${esc(link.dataset.photoTitle)}</h2><img src="${esc(link.getAttribute('href'))}" alt="${esc(link.querySelector('img').alt)}"><p>${esc(link.closest('figure').querySelector('figcaption p').textContent)}</p></article>`).join('');
+}
 function preparePrint() {
-  $('printPages').innerHTML = `<article class="print-preface"><h1>${esc(ARTICLE.title)}</h1><p class="print-subtitle">${esc(ARTICLE.subtitle)}</p><div class="source-prose">${paragraphList(ARTICLE.intro)}</div></article>` + STORY.map((c, i) => `<article class="print-chapter"><p class="era">${esc(c.era)}</p><h2>${esc(c.title)}</h2><div class="comic-grid">${c.frames.map((_, j) => panelHTML(c, i, j, true)).join('')}</div></article>`).join('') + `<article class="print-afterword"><h2>${esc(ARTICLE.afterwordTitle)}</h2><div class="source-prose">${paragraphList(ARTICLE.afterword)}</div></article>`;
+  $('printPages').innerHTML = `<article class="print-preface"><h1>${esc(ARTICLE.title)}</h1><p class="print-subtitle">${esc(ARTICLE.subtitle)}</p><div class="source-prose">${paragraphList(ARTICLE.intro)}</div></article>` + STORY.map((c, i) => `<article class="print-chapter"><p class="era">${esc(c.era)}</p><h2>${esc(c.title)}</h2><div class="comic-grid">${c.frames.map((_, j) => panelHTML(c, i, j, true)).join('')}</div></article>`).join('') + photoPrintHTML() + `<article class="print-afterword"><h2>${esc(ARTICLE.afterwordTitle)}</h2><div class="source-prose">${paragraphList(ARTICLE.afterword)}</div></article>`;
 }
 $('printButton').onclick = async () => {
   const b = $('printButton'); b.disabled = true; b.textContent = '准备全书…';
   try {
     preparePrint();
-    await Promise.all(STORY.map((_, i) => new Promise(resolve => {const im = new Image(); im.onload = resolve; im.onerror = resolve; im.src = asset(i);}))); window.print();
+    const images = [...STORY.map((_, i) => asset(i)), ...photoLinks.map(link => link.getAttribute('href'))];
+    await Promise.all(images.map(src => new Promise(resolve => {const im = new Image(); im.onload = resolve; im.onerror = resolve; im.src = src;}))); window.print();
   } finally { b.disabled = false; b.textContent = '打印珍藏 ↗'; }
 };
 window.addEventListener('beforeprint', preparePrint);
