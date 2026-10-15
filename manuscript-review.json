@@ -1,12 +1,13 @@
 {
-  "reference": "User-provided updated manuscript on 2026-10-15",
-  "wordingUnchanged": true,
+  "reference": "Latest user-provided revised manuscript on 2026-10-15 (adds age 92 in the afterword)",
+  "wordingUnchanged": false,
   "normalization": [
     "Whitespace and line wrapping",
     "Kangxi woman radical ⼥ to standard 女",
-    "Decorative separator ───"
+    "Decorative separator ───",
+    "Correct the typo 當吋 to 当时"
   ],
-  "normalizedTextSHA256": "4e0e09e978d29585c1080f6612505c54a77c8c07a5653f1b67fbcb38720afe91",
+  "normalizedTextSHA256": "a80861858590b46ace90b3e471a8da1ac4303b0487a3a673acc9a699af15655f",
   "sections": [
     {
       "heading": "前言",
@@ -63,5 +64,16 @@
   "updatedArtworkFiles": [
     "dist/assets/page-02-v3.png",
     "dist/assets/page-03-v3.png"
-  ]
+  ],
+  "latestRevision": {
+    "section": "后记：一段值得珍藏的家族记忆",
+    "before": "以上真人故事，是金线和金玉在永发家与爸爸闲聊时所做的记录。",
+    "submitted": "以上真人故事，是金线和金玉在永发家与當吋92岁的爸爸闲聊时 所做的记录。",
+    "after": "以上真人故事，是金线和金玉在永发家与当时92岁的爸爸闲聊时所做的记录。",
+    "contentChanges": 1,
+    "allOtherSectionsUnchanged": true,
+    "submittedNormalizedTextSHA256": "46df2df5f174037f5874e4f439be0025e817d4aeebbd7d492cd6cac152d96335",
+    "matchesUpdatedManuscriptAfterListedNormalization": true,
+    "artworkChangeRequired": false
+  }
 }
