@@ -1,4 +1,29 @@
 const $ = id => document.getElementById(id);
+const systemTheme = matchMedia('(prefers-color-scheme: dark)');
+let chosenTheme = null;
+try {
+  const saved = localStorage.getItem('tiancai-theme');
+  if (saved === 'light' || saved === 'dark') chosenTheme = saved;
+} catch {}
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  $('themeToggle').setAttribute('aria-checked', String(theme === 'dark'));
+  document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#19211d' : '#f3efe5';
+}
+applyTheme(chosenTheme || (systemTheme.matches ? 'dark' : 'light'));
+$('themeToggle').addEventListener('click', () => {
+  chosenTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  try { localStorage.setItem('tiancai-theme', chosenTheme); } catch {}
+  applyTheme(chosenTheme);
+});
+systemTheme.addEventListener('change', e => {
+  if (!chosenTheme) applyTheme(e.matches ? 'dark' : 'light');
+});
+window.addEventListener('storage', e => {
+  if (e.key !== 'tiancai-theme' && e.key !== null) return;
+  chosenTheme = e.newValue === 'light' || e.newValue === 'dark' ? e.newValue : null;
+  applyTheme(chosenTheme || (systemTheme.matches ? 'dark' : 'light'));
+});
 let current = 0;
 try { current = Math.min(9, Math.max(0, Number(localStorage.getItem('tiancai-page')) || 0)); } catch {}
 const positions = ['0% 0%', '100% 0%', '0% 100%', '100% 100%'];
