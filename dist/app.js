@@ -3,6 +3,30 @@ let current = 0;
 try { current = Math.min(9, Math.max(0, Number(localStorage.getItem('tiancai-page')) || 0)); } catch {}
 const positions = ['0% 0%', '100% 0%', '0% 100%', '100% 100%'];
 const asset = i => STORY[i].artwork || `assets/page-${String(i + 1).padStart(2, '0')}.png`;
+let prefetchGeneration = 0;
+function prefetchNextPage() {
+  const generation = ++prefetchGeneration;
+  const connection = navigator.connection;
+  if (current >= STORY.length - 1 || connection?.saveData || /^(slow-)?2g$/.test(connection?.effectiveType)) return;
+  const page = current;
+  // Let the visible artwork and cover finish before using bandwidth for the next page.
+  const visible = new Image();
+  visible.onload = () => {
+    const schedule = () => {
+      const preload = () => {
+        if (generation !== prefetchGeneration) return;
+        const next = new Image();
+        next.fetchPriority = 'low';
+        next.src = asset(page + 1);
+      };
+      if ('requestIdleCallback' in window) requestIdleCallback(preload, { timeout: 3000 });
+      else setTimeout(preload, 500);
+    };
+    if (document.readyState === 'complete') schedule();
+    else window.addEventListener('load', schedule, { once: true });
+  };
+  visible.src = asset(page);
+}
 const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 const prose = text => text.split(/\n\n/).filter(Boolean).map(p => `<p>${esc(p)}</p>`).join('');
 const paragraphList = paragraphs => paragraphs.map(p => `<p>${esc(p)}</p>`).join('');
@@ -28,8 +52,7 @@ function render(scroll = false) {
   $('comicPage').querySelectorAll('[data-panel]').forEach(b => b.addEventListener('click', () => openPanel(Number(b.dataset.panel))));
   $('dots').querySelectorAll('[data-page]').forEach(b => b.addEventListener('click', () => go(Number(b.dataset.page))));
   if (scroll) jumpToReader();
-  const next = new Image();
-  next.src = asset(Math.min(current + 1, 9));
+  prefetchNextPage();
 }
 function jumpToReader() {
   const top = Math.max(0, window.scrollY + $('reader').getBoundingClientRect().top - 12);
